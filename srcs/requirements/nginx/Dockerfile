@@ -18,13 +18,13 @@ RUN mkdir ./ssl && \
 	-out ./ssl/jebouche.crt \
 	-subj "/C=FI/ST=Helsinki/L=Helsinki/O=42 School/OU=jebouche/CN=jebouche.42.fr"
 
-EXPOSE 443
-
 RUN rm *.conf
 
 COPY ./conf/nginx.conf nginx.conf
 
 COPY ./tools /www
+
+EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]
 
