@@ -15,28 +15,28 @@ services:
     networks:
       - jebouche_inception_network
     restart: always
-    volumes:
-      - wordpress_volume:/vat/www/html
+    # volumes:
+    #   - wordpress_volume:/var/www/html
 
-  wordpress:
-    build: ./requirements/wordpress
-    image: my_wordpress
-    container_name: my_wordpress_c
-    networks:
-      - jebouche_inception_network
-    restart: always
-    volumes:
-      - wordpress_volume:/vat/www/html
+  # wordpress:
+  #   build: ./requirements/wordpress
+  #   image: my_wordpress
+  #   container_name: my_wordpress_c
+  #   networks:
+  #     - jebouche_inception_network
+  #   restart: always
+  #   volumes:
+  #     - wordpress_volume:/var/www/html
   
-  mariadb:
-    build: ./requirements/mariadb
-    image: my_mariadb
-    container_name: my_mariadb_c
-    networks:
-      - jebouche_inception_network
-    restart: always
-    volumes:
-      - mariadb_volume:/var/lib/mysql
+  # mariadb:
+  #   build: ./requirements/mariadb
+  #   image: my_mariadb
+  #   container_name: my_mariadb_c
+  #   networks:
+  #     - jebouche_inception_network
+  #   restart: always
+  #   volumes:
+  #     - mariadb_volume:/var/lib/mysql
 
 volumes:
   wordpress_volume:
