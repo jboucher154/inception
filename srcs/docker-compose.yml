@@ -2,26 +2,42 @@ version: "1.29.2"
 # https://www.aquasec.com/cloud-native-academy/docker-container/docker-networking/
 networks:
   jebouche_inception_network:
-    driver: bridge
+    driver: bridge #same a default
 
 services:
 
   nginx:
     build: ./requirements/nginx
+    image: my_nginx
     container_name: my_nginx_c
     ports:
       - "8000:443"
     networks:
       - jebouche_inception_network
+    restart: always
+    volumes:
+      - wordpress_volume:/vat/www/html
 
-  # wordpress:
-  #   build: ./requirements/wordpress
-  #   container_name: my_wordpress_c
-  #   networks:
-  #     - jebouche_inception_network
+  wordpress:
+    build: ./requirements/wordpress
+    image: my_wordpress
+    container_name: my_wordpress_c
+    networks:
+      - jebouche_inception_network
+    restart: always
+    volumes:
+      - wordpress_volume:/vat/www/html
   
-  # mariadb:
-  #   build: ./requirements/mariadb
-  #   container_name: my_mariadb_c
-  #   networks:
-  #     - jebouche_inception_network
+  mariadb:
+    build: ./requirements/mariadb
+    image: my_mariadb
+    container_name: my_mariadb_c
+    networks:
+      - jebouche_inception_network
+    restart: always
+    volumes:
+      - mariadb_volume:/var/lib/mysql
+
+volumes:
+  wordpress_volume:
+  mariadb_volume:
