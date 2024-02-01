@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS my_inception_db;
+USE my_inception_db;
+
+ALTER USER 'root' IDENFIFIED BY '$DB_ROOT_PASSWORD'
+GRANT ALL PRIVILEGES ON my_inception_db.* TO 'root'@'%';
+CREATE USER '$DB_USER' IDENTIFIED BY '$DB_USER_PASSWORD';
+GRANT ALL PRIVILEGES ON my_inception_db.* TO '$DB_USER'@'%';
+
+FLUSH PRIVILIEGES;
+# root user not log in

@@ -1,4 +1,4 @@
-version: "1.29.2"
+version: "1"
 # https://www.aquasec.com/cloud-native-academy/docker-container/docker-networking/
 networks:
   jebouche_inception_network:
@@ -7,9 +7,9 @@ networks:
 services:
 
   nginx:
-    build: ./requirements/nginx
-    image: my_nginx
-    container_name: my_nginx_c
+    build: ./srcs/requirements/nginx
+    image: nginx
+    container_name: nginx_c
     ports:
       - "8000:443"
     networks:
@@ -19,9 +19,9 @@ services:
     #   - wordpress_volume:/var/www/html
 
   # wordpress:
-  #   build: ./requirements/wordpress
-  #   image: my_wordpress
-  #   container_name: my_wordpress_c
+  #   build: ./srcs/requirements/wordpress
+  #   image: wordpress
+  #   container_name: wordpress_c
   #   networks:
   #     - jebouche_inception_network
   #   restart: always
@@ -29,9 +29,9 @@ services:
   #     - wordpress_volume:/var/www/html
   
   # mariadb:
-  #   build: ./requirements/mariadb
-  #   image: my_mariadb
-  #   container_name: my_mariadb_c
+  #   build: ./srcs/requirements/mariadb
+  #   image: mariadb
+  #   container_name: mariadb_c
   #   networks:
   #     - jebouche_inception_network
   #   restart: always
@@ -41,3 +41,5 @@ services:
 volumes:
   wordpress_volume:
   mariadb_volume:
+
+# can specify specific env vars to pass to the containers

@@ -3,10 +3,11 @@ FROM alpine:3.18.5
 WORKDIR /etc/nginx/
 
 # COPY install scripts from tools?
-RUN apk --no-cache add openssl
+RUN apk update && \
+	apk --no-cache add openssl
 
 RUN apk update && \
-	apk add nginx && \
+	apk add --no-cache nginx && \
 	adduser -D -g 'www' www && \
 	mkdir /www && \
 	chown -R www:www /var/lib/nginx && \
@@ -18,9 +19,7 @@ RUN mkdir ./ssl && \
 	-out ./ssl/jebouche.crt \
 	-subj "/C=FI/ST=Helsinki/L=Helsinki/O=42 School/OU=jebouche/CN=jebouche.42.fr"
 
-RUN rm *.conf
-
-COPY ./conf/nginx.conf nginx.conf
+COPY ./conf/nginx.conf ./http.d/default.conf
 
 COPY ./tools /www
 
