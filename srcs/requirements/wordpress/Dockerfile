@@ -1,4 +1,4 @@
-FROM alpine:3.18.5
+FROM alpine:3.18.6
 
 # RUN installs for php, php-fpm, wget, command line tools for wordpress
 
