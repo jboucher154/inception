@@ -15,9 +15,19 @@ services:
     networks:
       - jebouche_inception_network
     restart: always
-    # volumes:
-    #   - wordpress_volume:/var/www/html
+    volumes:
+      - wordpress_volume:/var/www/html
 
+  mariadb:
+    build: ./srcs/requirements/mariadb
+    image: mariadb
+    container_name: mariadb_c
+    networks:
+      - jebouche_inception_network
+    restart: always
+    volumes:
+      - mariadb-data:/var/lib/mysql
+  
   # wordpress:
   #   build: ./srcs/requirements/wordpress
   #   image: wordpress
@@ -28,18 +38,16 @@ services:
   #   volumes:
   #     - wordpress_volume:/var/www/html
   
-  # mariadb:
-  #   build: ./srcs/requirements/mariadb
-  #   image: mariadb
-  #   container_name: mariadb_c
-  #   networks:
-  #     - jebouche_inception_network
-  #   restart: always
-  #   volumes:
-  #     - mariadb_volume:/var/lib/mysql
 
 volumes:
-  wordpress_volume:
-  mariadb_volume:
+  mariadb-data:
+    name: mariadb-data
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/jebouche/Cursus42/inception/temp_volumes/mariadb-data
+
+  # wordpress_volume:
 
 # can specify specific env vars to pass to the containers
