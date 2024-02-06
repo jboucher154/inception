@@ -1,9 +1,5 @@
 #!/bin/bash
 
-export DB_ROOT_PASSWORD=test
-export DB_USER=test_user
-export DB_USER_PASSWORD=test1
-
 # make sure environment vars are set
 if [ -z "$DB_ROOT_PASSWORD" ]; then
   echo "Error: DB_ROOT_PASSWORD environment variable is not set."
@@ -37,6 +33,7 @@ GRANT ALL PRIVILEGES ON my_inception_db.* TO '${DB_USER}'@'%';
 FLUSH PRIVILEGES;
 EOF
 
+mysqld_safe --defaults-file=/etc/my.cnf
 
 # GRANT ALL PRIVILEGES ON *.* TO '${DB_USER}'@'%';
 # GRANT SELECT ON mysql.* TO '${DB_USER}'@'%';

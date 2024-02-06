@@ -20,5 +20,4 @@ RUN chmod +x /bin/init_mydb.sh \
 
 EXPOSE 3306
 
-CMD ["mysqld_safe", "--defaults-file=/etc/my.cnf"]
-# CMD [ "sh", "/bin/test.sh"]
+CMD [ "sh", "/bin/test.sh"/]
