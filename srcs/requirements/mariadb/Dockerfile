@@ -7,17 +7,10 @@ RUN apk update \
 
 COPY ./tools/init_mydb.sh /bin/init_mydb.sh
 
-
 COPY ./conf/my.cnf /etc/my.cnf
-# COPY ./conf/my.cnf /etc/my.cnf.d/my.cnf
 
-RUN chmod +x /bin/init_mydb.sh \
-	&& sh /bin/init_mydb.sh
-
-# COPY ./tools/test.sh /bin/test.sh
-
-# RUN chmod +x /bin/test.sh
+RUN chmod +x /bin/init_mydb.sh
 
 EXPOSE 3306
 
-CMD [ "sh", "/bin/test.sh"/]
+CMD [ "sh", "/bin/init_mydb.sh"]
