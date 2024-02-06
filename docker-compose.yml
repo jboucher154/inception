@@ -15,8 +15,8 @@ services:
     networks:
       - jebouche_inception_network
     restart: always
-    volumes:
-      - wordpress_volume:/var/www/html
+    # volumes:
+    #   - wordpress-data:/var/www/html
 
   mariadb:
     build: ./srcs/requirements/mariadb
@@ -33,6 +33,8 @@ services:
       - DB_USER_PASSWORD=${DB_USER_PASSWORD}
   
   # wordpress:
+  #   depends_on: 
+  #     - mariadb
   #   build: ./srcs/requirements/wordpress
   #   image: wordpress
   #   container_name: wordpress_c
@@ -40,7 +42,7 @@ services:
   #     - jebouche_inception_network
   #   restart: always
   #   volumes:
-  #     - wordpress_volume:/var/www/html
+  #     - wordpress-data:/var/www/html
   
 
 volumes:
@@ -52,6 +54,12 @@ volumes:
       o: bind
       device: /Users/jebouche/Cursus42/inception/temp_volumes/mariadb-data
 
-  # wordpress_volume:
+  # wordpress-data:
+  #   name: wordpress-data
+  #   driver: local
+  #   driver_opts:
+  #     type: none
+  #     o: bind
+  #     device: /Users/jebouche/Cursus42/inception/temp_volumes/wordpress-data
 
 # can specify specific env vars to pass to the containers
