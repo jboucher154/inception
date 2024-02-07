@@ -13,6 +13,7 @@ RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 
 RUN chmod +x /usr/local/bin/wp
 
+RUN mkdir -p /var/www/html
 # RUN script for wordpress install ad CMD (should clt for wp be done in here?)
 
 EXPOSE 9000
