@@ -12,7 +12,7 @@ done
 # download cli for wordpress
 # download wordpress with wp-cli allowing the root user to do so
 
-cd var/www/html/
+cd /var/www/html/
 # change directory to where you want them first (may need to make one)
 wp core download --allow-root
 
@@ -23,7 +23,7 @@ wp config create --dbname=testing --dbuser=wp --dbpass=securepswd --dbhost=127.0
 wp config create --dbname=$DB_NAME --dbuser=$DB_USER --dbpass=$DB_USER_PASSWORD --dbhost=mariadb --path=/var/www/html/ --force
 
 # install wordpress
-wp core install --url=$DOMAIN_NAME --title=$WP_TITLE --admin_user=$WP_ADMIN --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL --allow-root --skip-email --path=/var/www/html/
+wp core install --url=$DOMAIN_NAME --title=$WP_TITLE --admin_user=$WP_ADMIN --admin_password=$WP_ADMIN_PASSWORD --admin_email=$WP_ADMIN_EMAIL --skip-email --path=/var/www/html/ --allow-root
 # make user
 # --path=/var/www/html maybe set as same location as volume
 wp user create $WP_USER $WP_USER_EMAIL --role=editor --user_pass=$WP_USER_PASSWORD --path=/var/www/html/

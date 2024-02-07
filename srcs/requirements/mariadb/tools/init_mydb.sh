@@ -33,7 +33,7 @@ GRANT ALL PRIVILEGES ON my_inception_db.* TO '${DB_USER}'@'%';
 FLUSH PRIVILEGES;
 EOF
 
-mysqld_safe --defaults-file=/etc/my.cnf
+exec mysqld_safe --defaults-file=/etc/my.cnf
 
 # GRANT ALL PRIVILEGES ON *.* TO '${DB_USER}'@'%';
 # GRANT SELECT ON mysql.* TO '${DB_USER}'@'%';

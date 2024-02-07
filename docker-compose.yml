@@ -19,7 +19,10 @@ services:
     #   - wordpress-data:/var/www/html
 
   mariadb:
-    build: ./srcs/requirements/mariadb
+    build:
+      context: ./srcs/requirements/mariadb
+      # args:
+      #   - name=value
     image: mariadb
     container_name: mariadb_c
     networks:
