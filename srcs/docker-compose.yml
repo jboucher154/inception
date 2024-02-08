@@ -7,24 +7,29 @@ networks:
 services:
 
   nginx:
-    build: ./srcs/requirements/nginx
+    depends_on:
+      - mariadb
+      - wordpress
+    build: ./requirements/nginx
     image: nginx
     container_name: nginx_c
+    init: true
     ports:
       - "8000:443"
     networks:
       - jebouche_inception_network
     restart: always
-    # volumes:
-    #   - wordpress-data:/var/www/html
+    volumes:
+      - wordpress-data:/var/www/html
 
   mariadb:
     build:
-      context: ./srcs/requirements/mariadb
+      context: ./requirements/mariadb
       # args:
       #   - name=value
     image: mariadb
     container_name: mariadb_c
+    init: true
     networks:
       - jebouche_inception_network
     restart: always
@@ -38,9 +43,11 @@ services:
   wordpress:
     depends_on:
       - mariadb
-    build: ./srcs/requirements/wordpress
+        # condition: service_started
+    build: ./requirements/wordpress
     image: wordpress
     container_name: wordpress_c
+    init: true
     networks:
       - jebouche_inception_network
     restart: always

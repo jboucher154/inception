@@ -13,15 +13,23 @@ RUN apk update \
 	php81-mysqli \
 	php81-phar \
 	php81-mbstring \
+	curl \
+	libcurl \
+	php81-curl \
+	libzip \
+	php81-zip \
 	wget
 
-# command line tools for wordpress
+# command line tools for wordpress, may not need wget anymore
 ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /usr/local/bin/wp
 
 RUN chmod +x /usr/local/bin/wp
 
 RUN mkdir -p /var/www/html
-# RUN script for wordpress install ad CMD (should clt for wp be done in here?)
+
+# WORKDIR /var/www/html
+
+# RUN wp core download --allow-root 
 
 EXPOSE 9000
 
