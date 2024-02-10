@@ -1,0 +1,83 @@
+version: "1"
+# https://www.aquasec.com/cloud-native-academy/docker-container/docker-networking/
+networks:
+  jebouche_inception_network:
+    driver: bridge #same a default
+
+services:
+
+  nginx:
+    build: ./requirements/nginx
+    image: nginx
+    container_name: nginx_c
+    init: true
+    ports:
+      - "443:443"
+    networks:
+      - jebouche_inception_network
+    restart: always
+    volumes:
+      - wordpress-data:/var/www/html
+
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+      # args:
+      #   - name=value
+    image: mariadb
+    container_name: mariadb_c
+    init: true
+    networks:
+      - jebouche_inception_network
+    restart: always
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_USER_PASSWORD=${MARIADB_USER_PASSWORD}
+  
+  wordpress:
+    depends_on:
+      - mariadb
+        # condition: service_started
+    build: ./requirements/wordpress
+    image: wordpress
+    container_name: wordpress_c
+    init: true
+    networks:
+      - jebouche_inception_network
+    restart: always
+    volumes:
+      - wordpress-data:/var/www/html
+    environment:
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_USER_PASSWORD=${MARIADB_USER_PASSWORD}
+      - MARIADB_NAME=${MARIADB_NAME}
+      - WP_ADMIN=${WP_ADMIN}
+      - WP_ADMIN_PASSWORD=${WP_ADMIN_PASSWORD}
+      - WP_ADMIN_EMAIL=${WP_ADMIN_EMAIL}
+      - WP_USER=${WP_USER}
+      - WP_USER_PASSWORD=${WP_USER_PASSWORD}
+      - WP_USER_EMAIL=${WP_USER_EMAIL}
+      - WP_TITLE=${WP_TITLE}
+      - DOMAIN_NAME=${DOMAIN_NAME}
+  
+
+volumes:
+  mariadb-data:
+    name: mariadb-data
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/jebouche/data/mariadb-data
+
+  wordpress-data:
+    name: wordpress-data
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/jebouche/data/wordpress-data
+

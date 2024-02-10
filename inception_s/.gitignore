@@ -1,0 +1,10 @@
+./srcs/.env
+en.subject.pdf
+
+.env
+
+temp_volumes/
+
+config_sample.php
+install.php
+wordpress_readme.html
