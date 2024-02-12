@@ -26,7 +26,7 @@ ADD https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar /u
 
 RUN chmod +x /usr/local/bin/wp
 
-RUN mkdir -p /var/www/html
+RUN mkdir -p /var/www/html /run/php/
 
 # WORKDIR /var/www/html
 
@@ -36,5 +36,7 @@ EXPOSE 9000
 
 # temp inf loop script to allow testing in image
 COPY ./tools/entrypoint.sh /bin/entrypoint.sh
+
+COPY ./tools/www.conf	/etc/php81/php-fpm.d/www.conf
 # CMD run the stuffs
 CMD [ "sh", "/bin/entrypoint.sh" ]
