@@ -9,11 +9,11 @@ RUN apk update && \
 	apk add --no-cache nginx && \
 	addgroup -S www && \
 	adduser -S -H -g "" www -G www && \
-	mkdir /www && \
+	mkdir -p /var/www/html && \
 	chown -R www:www /var/lib/nginx && \
-	chown -R www:www /www && \
 	chown -R www:www /var/lib/nginx/tmp && \
-	chown -R www:www /var/lib/nginx/html
+	chown -R www:www /var/lib/nginx/html && \
+	chown -R www:www /var/www/html
 
 RUN mkdir ./ssl && \
 	openssl req -x509 -newkey rsa:4096 \
@@ -22,6 +22,8 @@ RUN mkdir ./ssl && \
 	-subj "/C=FI/ST=Helsinki/L=Helsinki/O=42 School/OU=jebouche/CN=jebouche.42.fr"
 
 COPY ./conf/wordpress.conf ./http.d/default.conf
+
+#COPY ./tools/* /www/
 
 RUN sed -i 's/user nginx/user www www/' nginx.conf && \
 	sed -i 's/ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3;/ssl_protocols TLSv1.2 TLSv1.3;/' nginx.conf
