@@ -31,6 +31,6 @@ else
 fi
 
 chown -R www:www /var/www/html
-chmod -R 755 /var/www/html
+chmod -R 775 /var/www/html
 
 exec /usr/sbin/php-fpm81 -F

@@ -25,8 +25,7 @@ COPY ./conf/wordpress.conf ./http.d/default.conf
 
 #COPY ./tools/* /www/
 
-RUN sed -i 's/user nginx/user www www/' nginx.conf && \
-	sed -i 's/ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3;/ssl_protocols TLSv1.2 TLSv1.3;/' nginx.conf
+RUN sed -i 's/user nginx/user www www/' nginx.conf
 
 EXPOSE 443
 
