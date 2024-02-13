@@ -25,7 +25,7 @@ all: $(ENVIRONMENT_PATH) make_data_dirs build up
 .PHONY: help
 help:
 	@echo $(YELLOW) "Available commands:" $(NONE)
-	@echo $(GREEN) "make" $(NONE)build and up, checks if directories an dfiles exist"
+	@echo $(GREEN) "make" $(NONE) "build and up, checks if directories an dfiles exist"
 	@echo $(GREEN) "build" $(NONE) " runs docker compose build only"
 	@echo $(GREEN) "up" $(NONE) " runs docker compose up"
 	@echo $(GREEN) "down" $(NONE) " runs docker compose down"
