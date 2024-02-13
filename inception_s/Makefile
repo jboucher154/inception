@@ -35,8 +35,7 @@ help:
 
 .PHONY: up
 up:
-	$(DOCKER_BASE_COMAND) up
-# --detach
+	$(DOCKER_BASE_COMAND) up --detach
 
 .PHONY: build
 build:
@@ -44,7 +43,8 @@ build:
 
 .PHONY: down
 down:
-	$(DOCKER_BASE_COMAND) down
+	@echo $(CURSIVE) $(GRAY) "Calling docker compose down" $(NONE)
+	@$(DOCKER_BASE_COMAND) down
 
 .PHONY: make_data_dirs
 make_data_dirs:
@@ -55,12 +55,12 @@ make_data_dirs:
 	@echo $(GREEN) "Data directories created / exist" $(NONE)
 
 .PHONY: clean
-clean:
+clean: down
 	@echo $(CURSIVE) $(GRAY) "Pruning all docker containers and images" $(NONE)
 	docker system prune -a
 
-.PHONY: fclean
-fclean: clean
+.PHONY: clean_volumes
+clean_volumes: down
 
 	@if [ -d $(DATABASE_VOLUME_PATH) ]; then \
 		echo $(CURSIVE) $(GRAY) "Deleting data directory and volume for mariadb" $(NONE); \
@@ -79,6 +79,11 @@ fclean: clean
 	fi
 	
 	@echo $(GREEN) "Data directories are removed" $(NONE)
+
+
+.PHONY: fclean
+fclean: clean clean_volumes
+	@echo $(GREEN) $(NAME) " has been cleaned" $(NONE)
 
 .PHONY: re
 re: fclean all	
