@@ -61,13 +61,24 @@ clean:
 
 .PHONY: fclean
 fclean: clean
-	@echo $(CURSIVE) $(GRAY) "Deleting data directory for mariadb volume" $(NONE)
-	@sudo rm -rf $(DATABASE_VOLUME_PATH)
-	docker volume rm $(DATABASE_VOLUME_NAME)
-	@echo $(CURSIVE) $(GRAY) "Deleting data directory for wordpress volume" $(NONE)
-	@sudo rm -rf $(WORDPRESS_VOLUME_PATH)
-	@docker volume rm $(WORDPRESS_VOLUME_NAME)
-	@echo $(GREEN) "Data directories removed" $(NONE)
+
+	@if [ -d $(DATABASE_VOLUME_PATH) ]; then \
+		echo $(CURSIVE) $(GRAY) "Deleting data directory and volume for mariadb" $(NONE); \
+		sudo rm -rf $(DATABASE_VOLUME_PATH); \
+		docker volume rm $(DATABASE_VOLUME_NAME); \
+	else \
+		echo $(CURSIVE) $(GRAY) "mariadb volume already cleaned" $(NONE); \
+	fi
+	
+	@if [ -d $(WORDPRESS_VOLUME_PATH) ]; then \
+		echo $(CURSIVE) $(GRAY) "Deleting data directory for wordpress volume" $(NONE); \
+		sudo rm -rf $(WORDPRESS_VOLUME_PATH); \
+		docker volume rm $(WORDPRESS_VOLUME_NAME); \
+	else \
+		echo $(CURSIVE) $(GRAY) "wordpress volume already cleaned" $(NONE); \
+	fi
+	
+	@echo $(GREEN) "Data directories are removed" $(NONE)
 
 .PHONY: re
 re: fclean all	
