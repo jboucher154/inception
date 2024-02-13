@@ -1,15 +1,11 @@
 #!/bin/sh
 
+while ! wget --spider -q mariadb:3306; do
+	echo "Waiting for database connection..."
+	sleep 5
+done
 
-# while ! mysql -u $MARIADB_USER -p $MARIADB_USER_PASSWORD -h mariadb $MARIADB_NAME; do
-# 	sleep 5
-# done
-# change directory to where you want them first (may need to make one)
-
-
-#setup with the wp-cli https://www.cloudways.com/blog/wp-cli-commands/
-# make config
-#skip check to be removed once database is connected and running
+echo "Database connected"
 
 cd /var/www/html/
 if [ ! -f "/var/www/html/.wordpress_installed" ]; then
@@ -32,5 +28,5 @@ fi
 
 chown -R www:www /var/www/html
 chmod -R 775 /var/www/html
-
+echo "Running php-fpm in foreground"
 exec /usr/sbin/php-fpm81 -F

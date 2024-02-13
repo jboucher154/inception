@@ -23,13 +23,9 @@ RUN mkdir ./ssl && \
 
 COPY ./conf/wordpress.conf ./http.d/default.conf
 
-#COPY ./tools/* /www/
-
 RUN sed -i 's/user nginx/user www www/' nginx.conf
 
 EXPOSE 443
 
 CMD ["nginx", "-g", "daemon off;"]
 
-# https://www.cyberciti.biz/faq/how-to-install-nginx-web-server-on-alpine-linux/
-# https://stackoverflow.com/questions/65627946/how-to-start-nginx-server-within-alpine-image-using-rc-service-command

@@ -11,9 +11,6 @@ if [ -z "$MARIADB_USER" ] || [ -z "$MARIADB_USER_PASSWORD" ]; then
   exit 1
 fi
 
-#give commands to database using root user, no password to begin with
-# echo "MARIA DB CURRENT DIRECTORY"
-# ls -la
 
 if [ -f "/var/lib/mysql/.install_complete" ]; then
   echo "Database already intialized."
@@ -34,9 +31,6 @@ else
 EOF
 fi
 echo "Running database with mysqld_safe script"
-# while [ true ]; do
-#   sleep 1
-# done
 
 exec mysqld_safe --defaults-file=/etc/my.cnf
 

@@ -1,8 +1,8 @@
 version: "1"
-# https://www.aquasec.com/cloud-native-academy/docker-container/docker-networking/
+
 networks:
   jebouche_inception_network:
-    driver: bridge #same a default
+    driver: bridge
 
 services:
 
@@ -22,8 +22,6 @@ services:
   mariadb:
     build:
       context: ./requirements/mariadb
-      # args:
-      #   - name=value
     image: mariadb
     container_name: mariadb_c
     init: true
@@ -40,7 +38,6 @@ services:
   wordpress:
     depends_on:
       - mariadb
-        # condition: service_started
     build: ./requirements/wordpress
     image: wordpress
     container_name: wordpress_c

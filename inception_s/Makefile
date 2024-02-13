@@ -25,13 +25,13 @@ all: $(ENVIRONMENT_PATH) make_data_dirs build up
 .PHONY: help
 help:
 	@echo $(YELLOW) "Available commands:" $(NONE)
-	@echo $(GREEN) "make" $(NONE) " calls `build` and `up`, checks if directories an dfiles exist"
+	@echo $(GREEN) "make" $(NONE)build and up, checks if directories an dfiles exist"
 	@echo $(GREEN) "build" $(NONE) " runs docker compose build only"
 	@echo $(GREEN) "up" $(NONE) " runs docker compose up"
 	@echo $(GREEN) "down" $(NONE) " runs docker compose down"
 	@echo $(GREEN) "clean" $(NONE) " removes docker containers and images"
-	@echo $(GREEN) "fclean" $(NONE) "calls `clean` and removes volume contents and directories"
-	@echo $(GREEN) "re" $(NONE) "calls `fclean` and makes with `all`(same as make)"
+	@echo $(GREEN) "fclean" $(NONE) "calls clean and removes volume contents and directories"
+	@echo $(GREEN) "re" $(NONE) "calls fclean and makes with all (same as make)"
 
 .PHONY: up
 up:
