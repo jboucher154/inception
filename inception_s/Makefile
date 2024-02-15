@@ -15,23 +15,23 @@ GRAY='\033[2;37m'
 CURSIVE='\033[3m'
 YELLOW = '\033[0;93m'
 
-ifeq ($(wildcard $(ENVIRONMENT_PATH)), )
-	$(error .env files does not exist, please create it before running $(NAME))
-endif
+# ifeq ($(wildcard $(ENVIRONMENT_PATH)), )
+# 	$(error .env files does not exist, please create it before running $(NAME))
+# endif
 
 .PHONY: all
 all: $(ENVIRONMENT_PATH) make_data_dirs build up
 
 .PHONY: help
 help:
-	@echo $(YELLOW) "Available commands:" $(NONE)
-	@echo $(GREEN) "make" $(NONE) "build and up, checks if directories an dfiles exist"
-	@echo $(GREEN) "build" $(NONE) " runs docker compose build only"
-	@echo $(GREEN) "up" $(NONE) " runs docker compose up"
-	@echo $(GREEN) "down" $(NONE) " runs docker compose down"
-	@echo $(GREEN) "clean" $(NONE) " removes docker containers and images"
-	@echo $(GREEN) "fclean" $(NONE) "calls clean and removes volume contents and directories"
-	@echo $(GREEN) "re" $(NONE) "calls fclean and makes with all (same as make)"
+	@echo $(GREEN) "Available commands:" $(NONE)
+	@echo $(YELLOW) "make" $(NONE) $(CURSIVE) "\t build and up, checks if directories an dfiles exist" $(NONE)
+	@echo $(YELLOW) "build" $(NONE) $(CURSIVE) "\t runs docker compose build only" $(NONE)
+	@echo $(YELLOW) "up" $(NONE) $(CURSIVE) "\t\t runs docker compose up" $(NONE)
+	@echo $(YELLOW) "down" $(NONE) $(CURSIVE) "\t runs docker compose down" $(NONE)
+	@echo $(YELLOW) "clean" $(NONE) $(CURSIVE) "\t removes docker containers and images" $(NONE)
+	@echo $(YELLOW) "fclean" $(NONE) "\t calls clean and removes volume contents and directories" $(NONE)
+	@echo $(YELLOW) "re" $(NONE) $(CURSIVE) "\t\t calls fclean and makes with all (same as make)" $(NONE)
 
 .PHONY: up
 up:
