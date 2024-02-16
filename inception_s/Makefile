@@ -15,10 +15,6 @@ GRAY='\033[2;37m'
 CURSIVE='\033[3m'
 YELLOW = '\033[0;93m'
 
-# ifeq ($(wildcard $(ENVIRONMENT_PATH)), )
-# 	$(error .env files does not exist, please create it before running $(NAME))
-# endif
-
 .PHONY: all
 all: $(ENVIRONMENT_PATH) make_data_dirs build up
 
