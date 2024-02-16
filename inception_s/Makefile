@@ -31,8 +31,7 @@ help:
 
 .PHONY: up
 up:
-	$(DOCKER_BASE_COMAND) up 
-# --detach
+	$(DOCKER_BASE_COMAND) up --detach
 
 .PHONY: build
 build:
