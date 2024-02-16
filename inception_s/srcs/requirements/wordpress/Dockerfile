@@ -25,6 +25,7 @@ RUN mkdir -p /var/www/html /run/php/
 EXPOSE 9000
 
 COPY ./tools/entrypoint.sh /bin/entrypoint.sh
+RUN chmod +x /bin/entrypoint.sh
 
 COPY ./conf/www.conf	/etc/php81/php-fpm.d/www.conf
 
